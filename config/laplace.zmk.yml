@@ -1,0 +1,8 @@
+file_format: "1"
+id: laplace
+name: Laplace
+type: shield
+url: https://docs.keeb.io/laplace-build-log
+requires: [pro_micro]
+features:
+  - keys

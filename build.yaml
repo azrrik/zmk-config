@@ -12,5 +12,8 @@
 #     shield: reviung41
 #
 ---
+board: [ "nice_nano_v2" ]
+shield: [ "laplace" ]
 include:
-  - board: nice60
+  - board: nice_nano_v2
+    shield: laplace
