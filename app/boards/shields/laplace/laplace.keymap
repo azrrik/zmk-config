@@ -1,0 +1,88 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/rgb.h>
+#include <dt-bindings/zmk/outputs.h>
+
+#define DEFAULT 0
+#define LLAY 1
+#define RLAY 2
+#define FNLAY 3
+
+/ {
+
+    macros {
+      ZMK_MACRO(send_l,
+        wait-ms = <50>;
+        tap-ms = <50>;
+        bindings 
+          = <&macro_press &kp LGUI>
+          , <&macro_press &kp LSHFT>
+          , <&macro_tap &kp LEFT>
+          , <&macro_release &kp LSHFT>
+          , <&macro_release &kp LGUI>
+          ;    
+      )
+
+      ZMK_MACRO(send_r,
+        wait-ms = <50>;
+        tap-ms = <50>;
+        bindings 
+          = <&macro_press &kp LGUI>
+          , <&macro_press &kp LSHFT>
+          , <&macro_tap &kp RIGHT>
+          , <&macro_release &kp LSHFT>
+          , <&macro_release &kp LGUI>
+          ;    
+      )
+    };
+
+    keymap {
+      compatible = "zmk,keymap";
+
+// --------------------------------------------------------------------------------
+// | ESC |  Q  |  W  |  E  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  |  [  |  ]   |
+// --------------------------------------------------------------------------------
+// |  TAB  |  A  |  S  |  D  |  F  |  G  |  H  |  J  |  K  |  L  |  "  |    \     |
+// --------------------------------------------------------------------------------
+// | SHIFT  |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |  /  |  SHIFT  |
+// --------------------------------------------------------------------------------
+// |  1  |  2  |  3  |  4  |    BKSP   |    SPACE   |   5   |  6  |   7   |   8   |
+// --------------------------------------------------------------------------------
+        default_layer {
+          bindings = <
+  &kp GRAVE &kp  Q    &kp  W   &kp  E   &kp  R  &kp  T  &kp  Y  &kp  U  &kp  I    &kp  O   &kp  P    &kp LBKT  &kp RBKT
+  &kp TAB   &kp  A    &kp  S   &kp  D   &kp  F  &kp  G  &kp  H  &kp  J  &kp  K    &kp  L   &kp SQT   &kp ENTER
+  &kp LSHFT &kp  Z    &kp  X   &kp  C   &kp  V  &kp  B  &kp  N  &kp  M  &kp COMMA &kp DOT  &kp FSLH  &kp RSHFT
+  &kp ESC   &kp LCTRL &kp RGUI &kp RALT &lt LLAY BSPC   &lt RLAY SPACE  &kp RALT  &kp RGUI &kp RCTRL &mo FNLAY
+          >;
+        };
+
+        left_layer {
+          bindings = <
+  &kp GRAVE &kp N1    &kp N2    &kp N3   &kp N4   &kp N5  &kp N6  &kp HOME &kp  UP      &kp END    &kp PG_UP  &kp MINUS &kp PLUS
+  &kp TAB   &kp LSHFT &kp LCTRL &kp LGUI &kp LALT &kp  G  &kp  H  &kp LEFT &kp  DOWN    &kp RIGHT  &kp PG_DN  &kp BSLH  
+  &kp LSHFT &kp  Z    &kp  X    &kp  C   &kp V    &kp  B  &kp  N  &kp  M   &kp  COMMA   &kp DOT    &kp SEMI   &kp RSHFT 
+  &send_l   &send_r   &send_l   &send_r  &kp DEL          &lt RLAY SPACE   &out OUT_TOG &bt BT_NXT &bt BT_PRV &bt BT_CLR
+          >;
+        };
+
+        right_layer {
+          bindings = <
+  &kp GRAVE &kp PG_UP &kp HOME &kp  UP  &kp END   &kp N5  &kp N6  &kp N7   &kp N8       &kp N9     &kp N0     &kp MINUS &kp PLUS
+  &kp TAB   &kp PG_DN &kp LEFT &kp DOWN &kp RIGHT &kp  G  &kp  H  &kp RALT &kp RGUI     &kp RCTRL  &kp RSHFT  &kp BSLH  
+  &kp LSHFT &kp  Z    &kp  X   &kp  C   &kp  V    &kp  B  &kp  N  &kp  M   &kp COMMA    &kp DOT    &kp SEMI   &kp RSHFT 
+  &send_l   &send_r   &send_l  &send_r  &lt LLAY BSPC     &kp   BSPC       &out OUT_TOG &bt BT_NXT &bt BT_PRV &bt BT_CLR
+          >;
+        };
+
+        fn_layer {
+          bindings = <
+  &kp GRAVE &kp F1    &kp F2   &kp F3   &kp F4  &kp F5  &kp F6  &kp F7  &kp F8       &kp F9   &kp F10   &kp F11   &kp F12
+  &kp TAB   &kp  A    &kp  S   &kp  D   &kp  F  &kp  G  &kp  H  &kp  J  &kp  K       &kp  L   &kp SQT   &kp BSLH 
+  &kp LSHFT &kp  Z    &kp  X   &kp  C   &kp  V  &kp  B  &kp  N  &kp  M  &kp COMMA    &kp  DOT &kp SEMI  &kp RSHFT
+  &kp ESC   &kp LCTRL &kp RGUI &kp RALT &lt LLAY BSPC   &lt RLAY SPACE  &out OUT_TOG &kp RGUI &kp RCTRL &mo FNLAY
+          >;
+        };
+    };
+};
